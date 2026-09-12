@@ -1,8 +1,7 @@
-
+const getUserById = require("../services/user.service")
  const getUser = (req , res)=>{
-    res.json({
-        userId:req.params.id
-    })
+    const user = getUserById(req.params.id)
+    res.json(user)
 }
 
 module.exports = getUser
