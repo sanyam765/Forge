@@ -1,15 +1,19 @@
 const express = require("express")
 const userRoute = require("./routes/user.routes");
-
-const app = express()
-
+const authRoute = require("./routes/auth.routes.js")
+const logger = require('./middleware/logger.middleware')
+const connectDB = require('./config/db.js')
+const app = express();
+connectDB()
 const PORT = 5000
 app.use(express.json());
+app.use(logger)
 app.get("/" , (req , res)=>{
     res.send("Forger Server is Running")
 })
 
 app.use("/api/users" ,userRoute)
+app.use("/api/auth" , authRoute)
 app.get("/api/projects" , (req , res)=>{
      res.json({
     skill: req.query.skill
