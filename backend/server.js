@@ -1,7 +1,9 @@
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 const express = require("express")
 const userRoute = require("./routes/user.routes");
 const authRoute = require("./routes/auth.routes.js")
-const logger = require('./middleware/logger.middleware')
+const logger = require('./middleware/logger.middlware.js')
 const connectDB = require('./config/db.js')
 const app = express();
 connectDB()
