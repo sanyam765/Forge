@@ -4,14 +4,21 @@ const express = require("express")
 const userRoute = require("./routes/user.routes");
 const authRoute = require("./routes/auth.routes.js")
 const logger = require('./middleware/logger.middlware.js')
+
+const errorHandler = require("./middleware/error.middleware");
 const connectDB = require('./config/db.js')
 const app = express();
 connectDB()
 const PORT = 5000
 app.use(express.json());
 app.use(logger)
+app.get("/api/test-error" , (req , res , next)=>{
+    const err = new Error("this is a test error")
+    next(err)
+})
+app.use(errorHandler)
 app.get("/" , (req , res)=>{
-    res.send("Forger Server is Running")
+    res.send("Forge Server is Running")
 })
 
 app.use("/api/users" ,userRoute)
